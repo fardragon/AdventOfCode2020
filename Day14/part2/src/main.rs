@@ -77,11 +77,6 @@ struct Computer
 
 impl Computer 
 {
-	fn gray_encode(integer: u64) -> u64 
-	{
-		(integer >> 1) ^ integer
-	}
-
 	fn apply_bitmask_to_addr(&self, input: u64) -> Vec<u64>
 	{
 		let mut result = Vec::new();
@@ -92,7 +87,7 @@ impl Computer
 		{
 			let mut tmp_result: u64 = input;
 			let mut floating_index = 0;
-			let current_result_gray = Computer::gray_encode(ix);
+			// let current_result_gray = Computer::gray_encode(ix);
 			// println!("Input: {:b}", tmp_result);
 			for (pos, val) in &self.active_bitmask
 			{
@@ -113,7 +108,7 @@ impl Computer
 					2 =>
 					{
 						// println!("Addr: {:b}", tmp_result);
-						if (1 << floating_index) & current_result_gray > 0
+						if (1 << floating_index) & ix > 0
 						{
 							// println!("Setting bit {} to 1", pos);
 							let mask: u64 = 1 << pos;
